@@ -1,7 +1,8 @@
 
 // console.log(target);
-accessToken = 'pk.eyJ1IjoibWphbmRlcnM2IiwiYSI6ImNqdHRoYnpmbjFicjg0NG80bnJ4OTQ0ejMifQ.EnYDyXKQdBO7A1JaBUMXsQ'
+let accessToken = 'pk.eyJ1IjoibWphbmRlcnM2IiwiYSI6ImNqeXhrZGpqdTB5MTkzbHJvcm5ucHBlYWQifQ.FgC5f0EzLg9MeFb4fcelhw'
 let key = `e424ea0eb9b536ada64c484c74ceee72`
+let coordinates = []
 
 document.addEventListener('click', ({ target }) => {
     // 
@@ -21,11 +22,11 @@ document.addEventListener('click', ({ target }) => {
             document.querySelector('#foodSearch').innerHTML = "Enter all information"
             document.querySelector('#foodSearch').style.color = 'red'
         } else {
-            
+
             fetch(`https://api.mapbox.com/geocoding/v5/mapbox.places/"${search}".json?access_token=${accessToken}&country=us&place`)
-            .then(r => r.json())
-            .then(r => {
-                document.querySelector('#foodSearch').innerHTML = ''
+                .then(r => r.json())
+                .then(r => {
+                    document.querySelector('#foodSearch').innerHTML = ''
                     let coords
                     // console.log(r.features)
                     let rFeats = r.features
@@ -36,7 +37,7 @@ document.addEventListener('click', ({ target }) => {
                     });
                     let [lon, lat] = coords
                     return { lon, lat }
-    
+
                 })
                 .then(({ lon, lat }) => {
                     fetch(`https://developers.zomato.com/api/v2.1/cuisines?lat=${lat}&lon=${lon}&apikey=${key}`)
@@ -64,42 +65,40 @@ document.addEventListener('click', ({ target }) => {
                                     // document.querySelector('#foodSearch').innerHTML = ''
                                     resCall.forEach(element => {
                                         // console.log(element.restaurant)
-                    
+                                        // coordinates.push([element.restaurant.location.latitude, element.restaurant.location.longitude])
+                                        coordinates.push([element.restaurant])
                                         let resElem = document.createElement('div')
-                    
+
                                         resElem.innerHTML = `
                                             <div class="card">
                                                 <div class="card-header">
-                                                    <a href="${element.restaurant.url}">${element.restaurant.name}</a>
+                                                    <a class="card-title" href="${element.restaurant.url}">${element.restaurant.name}</a>
                                                 </div>
                             
                                                 <div class="crd-container">
                                                     <div class="card-body row">
-                                                        <div class="col-8 col-sm-8">
-                                                            <p>${element.restaurant.location.address}</p>
-                                                            <p>${element.restaurant.location.locality}</p>
-                                                        </div>
-                            
-                                                        <div class="col-4 col-sm-4">
-                                                            <p>Rating: ${element.restaurant.user_rating.aggregate_rating} out of 5</p>
-                                                            <p>Votes: ${element.restaurant.user_rating.votes}</p>
-                                                            <p>Average Cost for 2: $ ${element.restaurant.average_cost_for_two}</p>
-                                                        </div>
+                                                        <div class="col-12">
+                                                            <p class="rest_name">${element.restaurant.location.address}<br>
+                                                            ${element.restaurant.location.locality}</p>
+                                                           
+                                                            <span class="sub_title">Rating: </span>${element.restaurant.user_rating.aggregate_rating} out of 5 <br>
+                                                            <span class="sub_title">Votes:</span>
+                                                            ${element.restaurant.user_rating.votes}  <br>
+                                                            <span class="sub_title">Average Cost for 2:</span> $ ${element.restaurant.average_cost_for_two}
+                                                        
                                                     </div>
-                                                </div>
+                                                </div> 
                                             </div>
                                         `
-                    
-                    
+
+
                                         document.querySelector('#foodSearch').append(resElem)
                                     });
                                 })
                         })
                 })
-                .catch(e => console.error(e))
         }
 
 
     }
 })
-
