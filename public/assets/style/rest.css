@@ -1,0 +1,19 @@
+.chalkboard{
+background-color: rgba(129, 129, 129, 0.2);
+text-align: center; 
+}
+.restInput{
+    margin-bottom: 2%;
+}
+
+.label1{
+    font-weight: 700;
+    color:white;
+    font-size:1.2em;
+}
+
+#foodSearch{
+    height:700px;
+	overflow:auto;
+	text-align: center;	
+}

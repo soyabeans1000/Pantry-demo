@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Get Cooking!</title>
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
+    <!-- Bootstrap -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://www.gstatic.com/firebasejs/5.9.4/firebase.js"></script>
+
+    <link
+        href="https://fonts.googleapis.com/css?family=Covered+By+Your+Grace|Homemade+Apple|Indie+Flower|Cinzel+Decorative"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="assets/style/style.css" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.css" />
+
+
+
+<script>
+  // Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "AIzaSyDWyy2149PYyoU8ktDFLiObGj1qivony1g",
+    authDomain: "learning-1555129024240.firebaseapp.com",
+    databaseURL: "https://learning-1555129024240.firebaseio.com",
+    projectId: "learning-1555129024240",
+    storageBucket: "",
+    messagingSenderId: "153226810249",
+    appId: "1:153226810249:web:5c26613ddfd462b8"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+</script>
+
+
+    
+<script type="text/javascript">
+
+let auth = firebase.auth
+  // FirebaseUI config.
+  var uiConfig = {
+    signInSuccessUrl: 'recipeFinder.html',
+    signInOptions: [
+      // Leave the lines as is for the providers you want to offer your users.
+      firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+              ],
+    // tosUrl and privacyPolicyUrl accept either url string or a callback
+    // function.
+    // Terms of service url/callback.
+    tosUrl: 'sarik.html',
+    // Privacy policy url/callback.
+    privacyPolicyUrl: function() {
+      window.location.assign('https://www.google.com');
+    }
+  };
+
+  // Initialize the FirebaseUI Widget using Firebase.
+  var ui = new firebaseui.auth.AuthUI(firebase.auth());
+  // The start method will wait until the DOM is loaded.
+  ui.start('#login', uiConfig)
+
+
+auth().onAuthStateChanged(user => {
+
+  if (user){
+document.querySelector('firebaseui-auth-container').style.display = 'none'
+document.querySelector('#signout').style.display = 'block'
+document.querySelector('#login').style.display = 'none'
+
+     }
+
+     else {
+
+        document.querySelector('#firebaseui-auth-container').style.display = 'block'
+document.querySelector('#signOut').style.display = 'none'
+       
+     }
+})
+
+document.querySelector('#signOut').addEventListener('click', e => {
+auth.signOut()
+window.location.reload()
+
+})
+
+
+
+</script>
+
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light" style="background-color:orange">
+        <a class="navbar-brand" href="index.html">WHIP IT UPPPP!</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="recipeFinder.html">Reciepe Finder<span
+                            class="sr-only">(current)</span></a>
+                </li>
+
+
+                <li class="nav-item">
+                    <a class="nav-link" href="restarauntfinder.html">Too Lazy to cook?</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link signInUp" href="#" id="login">Sign
+                        In</a>
+                        <a class="nav-link signInUp" href="#" id="signOut">Sign
+                                Out</a>
+                </li>
+               
+            </ul>
+        </div>
+
+
+
+    </nav>
+
+
+    <div class="cta container rounded text-center text-white">
+        <div id="firebaseui-auth-container" style="background-color:red;"></div>
+    </div>
+
+    <!-- <div class="container">
+        <br>
+         Jumbotron 
+        <div class="jumbotron sign_up_box">
+          <h1>Welcome to My Awesome App</h1>
+          <div id="firebaseui-auth-container"></div-->
+            <!--end of Jumbotron-->
+        <!----/div-->
+        
+     
+    </div>
+
+
+
+    <script src="assets/javascript/app.js"></script>
+  
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+        <script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
+   
+    <script src="node_modules/firebaseui/dist/firebaseui.js"></script>
+<link type="text/css" rel="stylesheet" href="node_modules/firebaseui/dist/firebaseui.css" />
+
+
+
+   
+   
+
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
